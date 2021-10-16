@@ -33,6 +33,6 @@ jobs:
           args: "backend/. --check --line-length=100"
 
       - name: iSort
-        uses: jamescurtin/isort-action@master
+        uses: isort/isort-action@v0.1.0
         with:
           sortPaths: "backend/. --check-only"
