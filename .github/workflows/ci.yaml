@@ -35,4 +35,4 @@ jobs:
       - name: iSort
         run: |
           pip install isort
-          isort --profile black --line-length=100 backend/.
+          isort --profile black --line-length=100 --skip=venv/*  --check-only **/*.py
