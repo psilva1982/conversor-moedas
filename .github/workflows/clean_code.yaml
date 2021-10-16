@@ -1,5 +1,7 @@
 name: Code Formatting
-on: [push]
+on:
+  push:
+    branches: [main, backend]
 
 jobs:
   check-application:
