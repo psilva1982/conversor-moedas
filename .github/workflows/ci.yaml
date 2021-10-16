@@ -27,5 +27,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: iSort / black
-        uses: wrboyce/python-lint-action@v1.0.0
+      - name: Black
+        uses: lgeiger/black-action@master
+        with:
+          args: "backend/. --check --line-length=100"
