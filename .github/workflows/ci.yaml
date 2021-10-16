@@ -22,10 +22,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r backend/requirements.txt
 
-      # - name: Flake8 Lint
-      #   uses: reviewdog/action-flake8@v3
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Flake8 Lint
+        uses: reviewdog/action-flake8@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: iSort / black
-        uses: ricardochaves/python-lint@v1.4.0
+      - name: Black
+        uses: lgeiger/black-action@master
+        with:
+          args: "backend/. --check --line-length=100"
