@@ -7,20 +7,29 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Quote',
+            name="Quote",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('symbol', models.CharField(choices=[('BRL', 'Real'), ('BRL', 'Euro'), ('BRL', 'Iene')], max_length=3)),
-                ('date', models.DateField()),
-                ('value', models.DecimalField(decimal_places=3, max_digits=10)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                (
+                    "symbol",
+                    models.CharField(
+                        choices=[("BRL", "Real"), ("BRL", "Euro"), ("BRL", "Iene")], max_length=3
+                    ),
+                ),
+                ("date", models.DateField()),
+                ("value", models.DecimalField(decimal_places=3, max_digits=10)),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
         ),
     ]
