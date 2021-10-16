@@ -31,3 +31,8 @@ jobs:
         uses: lgeiger/black-action@master
         with:
           args: "backend/. --check --line-length=100"
+
+      - name: iSort
+        uses: jamescurtin/isort-action@master
+        with:
+          sortPaths: "backend/. --check-only"
