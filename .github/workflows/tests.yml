@@ -6,24 +6,28 @@ on:
   pull_request:
     branches: [main]
 
-jobs:
-  test:
+obs:
+  build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        db: [postgres]
-        python-version: [3.9]
-        include:
-          - db: postgres
-            db_user: runner
-            db_password: ""
+
+    services:
+      postgres:
+        image: postgres:10.8
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: currency
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: 3.9
       - name: Start PostgreSQL
         run: |
           sudo systemctl start postgresql.service
@@ -33,16 +37,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r backend/requirements.txt
           pip install apprise braintree coverage coveralls
+
+      - name: Run migrations
+        run: python backend/manage.py migrate
+
       - name: Run Tests
         env:
           DEBUG: False
           SECRET_KEY: fake
           VAT_COMPLY_URL: fake
-          DB: ${{ matrix.db }}
           DB_HOST: 127.0.0.1
           DB_NAME: currency
-          DB_USER: ${{ matrix.db_user }}
-          DB_PASS: ${{ matrix.db_password }}
+          DB_USER: postgres
+          DB_PASS: postgres
         run: |
           cd backend && coverage run --source="." manage.py test
 
