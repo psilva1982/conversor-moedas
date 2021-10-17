@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-card>
       <v-card-title>Gráfico de Cotações</v-card-title>
       <v-card-text>
@@ -59,18 +59,37 @@
             >
           </v-col>
         </v-row>
+
+        <v-row v-if="quotes != null">
+          <v-col cols="12" sm="12" lg="12"> <chart :data="quotes" /> </v-col>
+        </v-row>
       </v-card-text>
     </v-card>
+    <v-snackbar v-model="loading">
+      <v-row no-gutters>
+        <v-col cols="8">
+          <span class="font-weight-medium">{{ message }} </span></v-col
+        >
+        <v-col cols="4" class="d-flex justify-end">
+          <v-progress-circular size="26" indeterminate></v-progress-circular>
+        </v-col>
+      </v-row>
+    </v-snackbar>
   </v-container>
 </template>
 
 <script>
-
+import * as quotaService from '@/services/QuoteService'
+import Chart from './components/Chart.vue'
 export default {
+  components: { Chart },
   data: () => ({
+    loading: false,
+    message: '',
     symbol: null,
+    quotes: null,
     symbols: [
-      { id: 'RBL', description: 'Real' },
+      { id: 'BRL', description: 'Real' },
       { id: 'EUR', description: 'Euro' },
       { id: 'JPY', description: 'Iene' }
     ],
@@ -88,9 +107,20 @@ export default {
   },
 
   methods: {
-    getQuote () {
-      console.log(this.symbol)
-      console.log(this.date)
+    async getQuote () {
+      this.quotes = null
+      this.message = 'Carregando'
+      this.loading = true
+      try {
+        const res = await quotaService.get({ date: this.date, symbol: this.symbol })
+
+        if (res.status === 200) {
+          this.quotes = res.data
+        }
+      } catch (err) {
+        console.log(err)
+      }
+      this.loading = false
     }
   }
 }
