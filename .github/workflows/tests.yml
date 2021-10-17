@@ -53,6 +53,6 @@ jobs:
       - name: Covertura check
         uses: 5monkeys/cobertura-action@master
         with:
-          path: src/test.xml
+          path: coverage.xml
           repo_token: ${{ secrets.COVERAGE_SECRET }}
           minimum_coverage: 60
