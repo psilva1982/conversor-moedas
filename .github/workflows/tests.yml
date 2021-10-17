@@ -44,12 +44,8 @@ jobs:
           DB_USER: ${{ matrix.db_user }}
           DB_PASS: ${{ matrix.db_password }}
         run: |
-          coverage run --source="." backend/manage.py test && coverage xml
+          coverage run --source="." backend/manage.py test
 
-      - name: Run codacy-coverage-reporter
-        uses: slavcodev/coverage-monitor-action@1.2.0
-        with:
-          github_token: ${{ secrets.COVERAGE_SECRET }}
-          clover_file: "coverage.xml"
-          threshold_alert: 10
-          threshold_warning: 50
+      - name: Run coverage report
+        run: |
+          coverage report
