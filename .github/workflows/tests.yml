@@ -54,5 +54,5 @@ jobs:
         uses: 5monkeys/cobertura-action@master
         with:
           path: coverage.xml
-          repo_token: ${{ secrets.COVERAGE_SECRET }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
           minimum_coverage: 60
