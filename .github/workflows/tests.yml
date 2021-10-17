@@ -1,0 +1,66 @@
+name: Django Tests
+
+on:
+  push:
+    branches: [main, backend]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:10.8
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: currency
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r backend/requirements.txt
+          pip install apprise braintree coverage coveralls
+      - name: Run migrations
+        env:
+          DEBUG: False
+          SECRET_KEY: fake
+          VAT_COMPLY_URL: https://api.vatcomply.com/rates
+          DB_HOST: 127.0.0.1
+          DB_NAME: currency
+          DB_USER: postgres
+          DB_PASS: postgres
+        run: |
+          python backend/manage.py migrate
+      - name: Run Tests
+        env:
+          DEBUG: False
+          SECRET_KEY: fake
+          VAT_COMPLY_URL: https://api.vatcomply.com/rates
+          DB_HOST: 127.0.0.1
+          DB_NAME: currency
+          DB_USER: postgres
+          DB_PASS: postgres
+        run: |
+          cd backend && coverage run --source="." manage.py test
+      - name: Run coverage report
+        run: |
+          cd backend && coverage report && coverage xml
+      - name: Covertura check
+        uses: 5monkeys/cobertura-action@master
+        with:
+          path: backend/coverage.xml
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          minimum_coverage: 60
