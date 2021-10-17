@@ -38,7 +38,7 @@ jobs:
         env:
           DEBUG: False
           SECRET_KEY: fake
-          VAT_COMPLY_URL: fake
+          VAT_COMPLY_URL: https://api.vatcomply.com/rates
           DB_HOST: 127.0.0.1
           DB_NAME: currency
           DB_USER: postgres
