@@ -33,7 +33,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r backend/requirements.txt
           pip install apprise braintree coverage coveralls
-
       - name: Run migrations
         env:
           DEBUG: False
@@ -45,7 +44,6 @@ jobs:
           DB_PASS: postgres
         run: |
           python backend/manage.py migrate
-
       - name: Run Tests
         env:
           DEBUG: False
@@ -57,11 +55,9 @@ jobs:
           DB_PASS: postgres
         run: |
           cd backend && coverage run --source="." manage.py test
-
       - name: Run coverage report
         run: |
           cd backend && coverage report && coverage xml
-
       - name: Covertura check
         uses: 5monkeys/cobertura-action@master
         with:
