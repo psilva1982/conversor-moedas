@@ -35,12 +35,13 @@ jobs:
           pip install apprise braintree coverage coveralls
       - name: Run Tests
         env:
-          SECRET_KEY: fake
           DEBUG: False
+          SECRET_KEY: fake
+          VAT_COMPLY_URL: fake
           DB: ${{ matrix.db }}
           DB_HOST: 127.0.0.1
           DB_NAME: currency
           DB_USER: ${{ matrix.db_user }}
           DB_PASS: ${{ matrix.db_password }}
         run: |
-          coverage run --omit=*/tests/* --source=hc backend/manage.py test
+          coverage run --omit=*/tests/* --source=backend manage.py test
