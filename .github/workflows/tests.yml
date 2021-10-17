@@ -44,4 +44,10 @@ jobs:
           DB_USER: ${{ matrix.db_user }}
           DB_PASS: ${{ matrix.db_password }}
         run: |
-          coverage run --source="." backend/manage.py test
+          coverage run --source="." backend/manage.py test && coverage xml
+
+      - name: Run codacy-coverage-reporter
+        uses: codacy/codacy-coverage-reporter-action@v1
+        with:
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          coverage-reports: coverage.xml
