@@ -16,7 +16,7 @@ jobs:
         include:
           - db: postgres
             db_user: runner
-            db_password: ""
+            db_password: "postgres"
 
     steps:
       - uses: actions/checkout@v2
