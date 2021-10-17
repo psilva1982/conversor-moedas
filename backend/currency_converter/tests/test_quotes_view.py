@@ -19,7 +19,7 @@ class TestQuotesViewSet(APITestCase):
 
     def test_list_quotes_endpoint_with_pagination(self):
         """Test retrieving the list of quotes using pagination"""
-        url = reverse("quote-list") + "?offset=10"
+        url = reverse("quote-list") + "?page=2"
         response = self.client.get(url)
         self.assertEquals(response.status_code, status.HTTP_200_OK)
         self.assertEquals(response.data["count"], 15)
