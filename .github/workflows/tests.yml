@@ -44,15 +44,15 @@ jobs:
           DB_USER: ${{ matrix.db_user }}
           DB_PASS: ${{ matrix.db_password }}
         run: |
-          coverage run --source="." backend/manage.py test
+          cd backend && coverage run --source="." manage.py test
 
       - name: Run coverage report
         run: |
-          coverage report && coverage xml
+          cd backend && coverage report && coverage xml
 
       - name: Covertura check
         uses: 5monkeys/cobertura-action@master
         with:
-          path: coverage.xml
+          path: backend/coverage.xml
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           minimum_coverage: 60
