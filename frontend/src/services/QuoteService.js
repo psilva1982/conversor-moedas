@@ -10,5 +10,5 @@ export const list = (sortBy, sortDesc, page, itemsPerPage) => {
   if (sortDesc === 'true') {
     sortBy = '-' + sortBy
   }
-  return http.get(`api/dollar-quote/?page=${page}&ordering=${sortBy}&page_size=${itemsPerPage}`)
+  return http.get(`api/quotes/?page=${page}&ordering=${sortBy}&page_size=${itemsPerPage}`)
 }

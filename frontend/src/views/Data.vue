@@ -8,9 +8,9 @@
           :items="quotes"
           :options.sync="pagination"
           :server-items-length="totalQuotes"
-          loading-text="Carregando usuarios ..."
+          loading-text="Carregando cotações ..."
           no-data-text="Nenhum resultado encontrado ..."
-          :loading="carregando"
+          :loading="loading"
         >
         </v-data-table>
       </v-card-text>
@@ -19,12 +19,13 @@
 </template>
 
 <script>
-
+import * as quoteService from '@/services/QuoteService'
 export default {
   data: () => ({
     loading: false,
     quotes: [],
     totalQuotes: 0,
+    pagination: {},
     header: [
       { text: 'Data', value: 'date' },
       { text: 'Moeda', value: 'symbol' },
@@ -35,7 +36,7 @@ export default {
   watch: {
     pagination: {
       handler () {
-        this.search();
+        this.search()
       },
       deep: true
     }
@@ -43,24 +44,23 @@ export default {
 
   methods: {
     async search () {
-      this.carregando = true;
+      this.loading = true
       try {
-        const { sortBy, sortDesc, page, itemsPerPage } = this.pagination;
+        const { sortBy, sortDesc, page, itemsPerPage } = this.pagination
         const result = await quoteService.list(
           sortBy,
           sortDesc,
           page,
           itemsPerPage
-        );
-        this.quotes = result.data.results;
-        this.totalQuotes = result.data.count;
-      } catch (erro) {
-        //console.log(erro);
+        )
+        this.quotes = result.data.results
+        this.totalQuotes = result.data.count
+      } catch (err) {
+        console.log(err)
       }
-      this.carregando = false;
-    },
+      this.loading = false
+    }
   }
-
 }
 </script>
 
