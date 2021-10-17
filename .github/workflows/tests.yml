@@ -35,11 +35,26 @@ jobs:
           pip install apprise braintree coverage coveralls
 
       - name: Run migrations
-        run: python backend/manage.py migrate
+        env:
+          DEBUG: False
+          SECRET_KEY: fake
+          VAT_COMPLY_URL: fake
+          DB_HOST: 127.0.0.1
+          DB_NAME: currency
+          DB_USER: postgres
+          DB_PASS: postgres
+        run: |
+          python backend/manage.py migrate
 
       - name: Run Tests
         env:
           DEBUG: False
+          SECRET_KEY: fake
+          VAT_COMPLY_URL: fake
+          DB_HOST: 127.0.0.1
+          DB_NAME: currency
+          DB_USER: postgres
+          DB_PASS: postgres
         run: |
           cd backend && coverage run --source="." manage.py test
 
