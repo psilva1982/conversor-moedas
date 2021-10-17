@@ -27,12 +27,10 @@ jobs:
         uses: reviewdog/action-flake8@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Black
         uses: lgeiger/black-action@master
         with:
           args: "backend/. --check --line-length=100"
-
       - name: iSort
         run: |
           pip install isort
