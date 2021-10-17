@@ -48,4 +48,11 @@ jobs:
 
       - name: Run coverage report
         run: |
-          coverage report
+          coverage report && coverage xml
+
+      - name: Covertura check
+        uses: 5monkeys/cobertura-action@master
+        with:
+          path: src/test.xml
+          repo_token: ${{ secrets.COVERAGE_SECRET }}
+          minimum_coverage: 60
