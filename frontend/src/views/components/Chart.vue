@@ -13,7 +13,7 @@ export default {
         type: 'spline'
       },
       title: {
-        text: 'Cotação do Dóllar'
+        text: 'Cotação do Dólar'
       },
       series: [{
         name: '',
