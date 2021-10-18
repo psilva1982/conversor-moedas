@@ -4589,7 +4589,7 @@
   "resolved" "https://registry.npmjs.org/highcharts-vue/-/highcharts-vue-1.4.0.tgz"
   "version" "1.4.0"
 
-"highcharts@>=5.0.0":
+"highcharts@^9.2.2", "highcharts@>=5.0.0":
   "integrity" "sha512-OMEdFCaG626ES1JEcKAvJTpxAOMuchy0XuAplmnOs0Yu7NMd2RMfTLFQ2fCJOxo3ubSdm/RVQwKAWC+5HYThnw=="
   "resolved" "https://registry.npmjs.org/highcharts/-/highcharts-9.2.2.tgz"
   "version" "9.2.2"
