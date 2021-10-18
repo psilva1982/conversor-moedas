@@ -12,12 +12,8 @@
         <span class="mt-1">Dados salvos</span></v-btn
       >
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <v-icon class="mr-1">mdi-rocket-launch</v-icon>
+      <v-btn :href="herokuApi" target="_blank" text>
+        <v-icon class="mr-1">mdi-web</v-icon>
         <span class="mr-2">Consulta API</span>
       </v-btn>
     </v-app-bar>
@@ -32,9 +28,10 @@
 
 export default {
   name: 'App',
-
-  data: () => ({
-    //
-  })
+  computed: {
+    herokuApi () {
+      return process.env.VUE_APP_HEROKU_API
+    }
+  }
 }
 </script>
