@@ -35,8 +35,8 @@ export default {
 
   watch: {
     pagination: {
-      handler () {
-        this.search()
+      async handler () {
+        await this.search()
       },
       deep: true
     }
