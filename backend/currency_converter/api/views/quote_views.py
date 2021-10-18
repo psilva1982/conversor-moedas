@@ -14,6 +14,7 @@ class QuoteView(
     filter_fields = ["symbol"]
     queryset = Quote.objects.all()
     serializer_class = QuoteSerializer
+    ordering_fields = ["date", "symbol", "value"]
     ordering = ["date"]
 
     def list(self, request, *args, **kwargs):
