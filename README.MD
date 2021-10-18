@@ -10,7 +10,7 @@
 ```
 git clone https://github.com/psilva1982/conversor-moedas.git
 ```
-## The backend - [https://dollarquote-api.herokuapp.com/api/](https://dollarquote-api.herokuapp.com/api/)
+## The backend - 🌐 [https://dollarquote-api.herokuapp.com/api/](https://dollarquote-api.herokuapp.com/api/)
 2° Setup Django App
 ```
 cd backend
@@ -34,7 +34,7 @@ python manage.py migrate
 python manage.py runserver
 ```
 ---
-## The frontend
+## The frontend - 🌐 [https://dollar-quote.surge.sh/](https://dollar-quote.surge.sh/)
 Do you **need node/npm and yarn** installed on your pc.
 
 6° After you install node/npm and yarn proceed to install frontend dependencies
@@ -44,7 +44,7 @@ yarn install
 ```
 7° Configure .env
 ```
-mv .env-sample.txt .env
+mv .env-sample.txt .env.local
 ```
 8° Run server
 ```
