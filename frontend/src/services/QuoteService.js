@@ -7,7 +7,7 @@ export const get = (searchData) => {
 
 export const list = (sortBy, sortDesc, page, itemsPerPage) => {
   // Ajustando a ordenação
-  if (sortDesc === 'true') {
+  if (sortDesc[0] === true) {
     sortBy = '-' + sortBy
   }
   return http.get(`api/quotes/?page=${page}&ordering=${sortBy}&page_size=${itemsPerPage}`)
