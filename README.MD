@@ -42,11 +42,15 @@ Do you **need node/npm and yarn** installed on your pc.
 cd frontend
 yarn install
 ```
-7° Run server
+7° Configure .env
+```
+mv .env-sample.txt .env
+```
+8° Run server
 ```
 yarn serve
 ```
 
-8° Access webapp 👉 [http://localhost:8080/](http://localhost:8080/)
+9° Access webapp 👉 [http://localhost:8080/](http://localhost:8080/)
 
 Thats it!!! 🤘🤘🤘
